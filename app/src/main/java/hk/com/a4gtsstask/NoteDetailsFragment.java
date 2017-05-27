@@ -32,6 +32,8 @@ public class NoteDetailsFragment extends Fragment {
         if (getActivity().getTitle().equals("Note Details"))
             note = (Note) getActivity().getIntent().getSerializableExtra("Note");
         db = new DatabaseHandler(getActivity());
+
+
     }
 
     @Override

@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="hk.com.a4gtsstask.MainActivityFragment"
+
     tools:showIn="@layout/activity_main">
 
     <ListView
         android:id="@+id/notes_list"
         android:layout_width="match_parent"
+        android:layout_margin="12dp"
         android:layout_height="wrap_content"/>
 
 </LinearLayout>
