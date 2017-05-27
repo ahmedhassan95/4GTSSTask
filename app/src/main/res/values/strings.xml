@@ -13,7 +13,7 @@
     <string name="action_sign_up">Sign Up</string>
     <string name="auth_failed">Error Signing in</string>
     <string name="register_failed">Error Creating User</string>
-    <string name="title_activity_new_note">Creat New Note</string>
+    <string name="title_activity_new_note">Create New Note</string>
     <string name="action_done">Done</string>
     <string name="action_deleteAll">Delete All</string>
     <string name="blank_field">Mail/Password Cannot be Empty</string>

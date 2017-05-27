@@ -29,7 +29,7 @@ public class NoteDetailsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        if (getActivity().getTitle().equals("NoteActivity"))
+        if (getActivity().getTitle().equals("Note Details"))
             note = (Note) getActivity().getIntent().getSerializableExtra("Note");
         db = new DatabaseHandler(getActivity());
     }
@@ -79,7 +79,8 @@ public class NoteDetailsFragment extends Fragment {
                 Toast.makeText(getActivity(),"Title Cannot be Empty",Toast.LENGTH_SHORT).show();
             else
             {
-                Note note = new Note(nTitle, nBody);
+                note.setTitle(nTitle);
+                note.setBody(nBody);
                 db.updateNote(note);
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
@@ -100,7 +101,8 @@ public class NoteDetailsFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int id) {
                             dialog.cancel();
                             db.deleteNote(note);
-                            onResume();
+                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                            startActivity(intent);
                         }
                     });
 
