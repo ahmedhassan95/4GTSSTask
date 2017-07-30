@@ -5,19 +5,34 @@
     android:layout_width="match_parent"
     android:layout_margin="12dp"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="center_vertical"
     android:id="@+id/list_view">
 
-    <TextView
-        android:id="@+id/list_item_title"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/list_item_details"
-        android:layout_width="match_parent"
+    <EditText
+        android:hint="Enter note title"
+        android:id="@+id/noteTitle"
+        android:layout_width="0dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:background="@null"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+        android:layout_weight="10"/>
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/delete_note"
+        android:src="@drawable/ic_delete_44"
+        android:contentDescription="Delete Note" />
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center"
+
+        />
 </LinearLayout>

@@ -1,29 +1,30 @@
 package hk.com.a4gtsstask;
 
-import java.io.Serializable;
+import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by ahmed on 26 May 2017.
- */
+import java.io.Serializable;
 
 public class Note implements Serializable {
 
+    @SerializedName("title")
     private String title;
-    private String body;
-    private int id;
+    @SerializedName("id")
+    private String id;
+    @SerializedName("completed")
+    private boolean completed;
 
     public Note() {
     }
 
-    public Note( int id,String title, String body) {
+    public Note( String id,String title, boolean completed) {
         this.title = title;
-        this.body = body;
+        this.completed = completed;
         this.id = id;
     }
 
-    public Note(String title, String body) {
+    public Note(String title, boolean completed) {
         this.title = title;
-        this.body = body;
+        this.completed= completed;
     }
 
     public String getTitle() {
@@ -34,19 +35,19 @@ public class Note implements Serializable {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
+    public boolean isCompleted() {
+        return completed;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 }

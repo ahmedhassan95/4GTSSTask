@@ -1,6 +1,7 @@
 package hk.com.a4gtsstask;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -47,11 +50,25 @@ public class NotesAdapter extends ArrayAdapter<Note> {
         }
         Note note = getItem(position);
 
-        TextView title = (TextView) view.findViewById(R.id.list_item_title);
+
+        final EditText title = (EditText) view.findViewById(R.id.noteTitle);
         title.setText(note.getTitle());
 
-        TextView details = (TextView) view.findViewById(R.id.list_item_details);
-        details.setText(note.getBody());
+        final CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View view) {
+                    if(checkBox.isChecked() && title.getText().toString().length()!= 0) {
+
+                        title.setPaintFlags(title.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+                    }
+                    else
+                        title.setPaintFlags(title.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+
+            }
+        });
+
 
 
         return view;
