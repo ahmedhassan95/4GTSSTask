@@ -1,6 +1,7 @@
 package hk.com.a4gtsstask;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -54,10 +55,15 @@ public class MainActivityFragment extends Fragment {
 
         final ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         Call<List<Note>> allNotes = apiService.getAllNotes();
+        final ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         allNotes.enqueue(new Callback<List<Note>>() {
 
             @Override
             public void onResponse(Call<List<Note>> call, Response<List<Note>> response) {
+                progressDialog.dismiss();
                 List<Note> notesRetrieved = response.body();
                 notes.clear();
                 notes.addAll(notesRetrieved);
@@ -69,6 +75,7 @@ public class MainActivityFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Note>> call, Throwable throwable) {
+                progressDialog.dismiss();
                 notes.clear();
                 notes.addAll(db.getAllNotes());
                 Log.e(TAG, throwable.toString());
@@ -99,17 +106,18 @@ public class MainActivityFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Note note = new Note(editText.getText().toString(),false);
+                        final Note note = new Note(editText.getText().toString(),false);
                         notes.add(note);
-                        adapter.notifyDataSetChanged();
 
                         final Call<Note>  newNote = apiService.addNote(note.getTitle(),notes.size(),false);
-                        final String[] id = {"100"};
                         newNote.enqueue(new Callback<Note>() {
                             @Override
                             public void onResponse(Call<Note> call, Response<Note> response) {
-                                id[0] = response.body().getId();
+                                Log.d("Note ID",response.body().getId());
+                                note.setId(response.body().getId());
 
+                                adapter.notifyDataSetChanged();
+                                db.addNote(note);
                             }
 
                             @Override
@@ -117,8 +125,7 @@ public class MainActivityFragment extends Fragment {
 
                             }
                         });
-                        note.setId(id[0]);
-                        db.addNote(note);
+
 
                     }
                 });

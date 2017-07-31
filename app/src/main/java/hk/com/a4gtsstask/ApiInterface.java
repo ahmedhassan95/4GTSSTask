@@ -6,6 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -20,12 +21,14 @@ public interface ApiInterface {
     @GET("todos")
     Call<List<Note>> getAllNotes();
 
+    @FormUrlEncoded
     @POST("todos")
     Call<Note> addNote(@Field("title") String title, @Field("order") int order,@Field("completed") boolean completed);
 
+    @FormUrlEncoded
     @PATCH("todos/{id}")
-    Call<Note> updateNote (@Path("id") int id , @Field("title") String title);
+    Call<Note> updateNote (@Path("id") String id , @Field("title") String title);
 
     @DELETE("todos/{id}")
-    Call<Note> deleteNote (@Path("id") int id);
+    Call<Note> deleteNote (@Path("id") String id);
 }
